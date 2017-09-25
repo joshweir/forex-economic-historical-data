@@ -1,0 +1,33 @@
+#install rvm
+
+#update ruby to 2.3.4
+cd forex-economic-data
+rvm install ruby-2.3.4
+
+#upgrade nodejs to 6.11.x:
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+#setup db environment variables in .bashrc and .bash_profile:
+export FX_DEV_DB_USER=
+export FX_DEV_DB_PASS=
+export FX_DEV_DB_NAME=fxdata_development
+export FX_TEST_DB_USER=
+export FX_TEST_DB_PASS=
+export FX_TEST_DB_NAME=fxdata_test
+
+# install gem dependencies
+bundle install
+
+# install npm dependencies
+npm install
+
+# create the postgres databases
+# update config/database.yml details if needed
+rake db:create
+
+# generate assets for development
+npm run webpack
+
+# start server
+rails s
