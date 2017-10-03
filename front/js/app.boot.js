@@ -17,7 +17,7 @@ import HelloWorld from './containers/hello-world.cont';
 let appBoot = module.exports = {};
 
 appBoot.init = function() {
-  console.log('init() :: App starts booting...');
+  console.log('init() :: App starts booting....');
 
   // Check for devToolsExtension
   const create = window.devToolsExtension ?

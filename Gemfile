@@ -9,9 +9,9 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
-#gem 'pg', '~> 0.18'
-#use mysql
-gem 'mysql2', '~> 0.3.18'
+gem 'pg', '~> 0.18'
+#if using mysql
+#gem 'mysql2', '~> 0.3.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -50,6 +50,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'factory_girl_rails'
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'puffing-billy'
   gem 'webmock'
 end

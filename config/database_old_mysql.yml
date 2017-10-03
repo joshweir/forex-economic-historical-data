@@ -1,0 +1,54 @@
+# MySQL.  Versions 5.0+ are recommended.
+#
+# Install the MYSQL driver
+#   gem install mysql2
+#
+# Ensure the MySQL gem is defined in your Gemfile
+#   gem 'mysql2'
+#
+# And be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+#
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  pool: 20
+  reconnect: true
+
+development:
+  <<: *default
+  database: <%= ENV['FX_DEV_DB_NAME'] %>
+  username: <%= ENV['FX_DEV_DB_USER'] %>
+  password: <%= ENV['FX_DEV_DB_PASS'] %>
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  <<: *default
+  database: <%= ENV['FX_TEST_DB_NAME'] %>
+  username: <%= ENV['FX_TEST_DB_USER'] %>
+  password: <%= ENV['FX_TEST_DB_PASS'] %>
+  socket: /var/run/mysqld/mysqld.sock
+
+production:
+  <<: *default
+  database: <%= ENV['FX_PROD_DB_NAME'] %>
+  username: <%= ENV['FX_PROD_DB_USER'] %>
+  password: <%= ENV['FX_PROD_DB_PASS'] %>
+  host: <%= ENV['FX_PROD_DB_HOST'] %>
+  port: <%= ENV['FX_PROD_DB_PORT'] %>
+
+production_scraper:
+  <<: *default
+  database: <%= ENV['FX_PROD_DB_NAME'] %>
+  username: <%= ENV['FX_PROD_DB_USER'] %>
+  password: <%= ENV['FX_PROD_DB_PASS'] %>
+  host: <%= ENV['FX_PROD_DB_HOST'] %>
+  port: <%= ENV['FX_PROD_DB_PORT'] %>
+
+development_scraper:
+  <<: *default
+  database: <%= ENV['FX_DEV_DB_NAME'] %>
+  username: <%= ENV['FX_DEV_DB_USER'] %>
+  password: <%= ENV['FX_DEV_DB_PASS'] %>
+  socket: /var/run/mysqld/mysqld.sock

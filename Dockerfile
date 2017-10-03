@@ -1,7 +1,9 @@
-FROM ruby:2.3.4-alpine
+#FROM ruby:2.3.4-alpine
+FROM ruby:2.3.4
 
-RUN apk add --update --no-cache build-base ruby-dev tzdata postgresql-dev \
- nodejs
+#RUN apk add --update --no-cache build-base ruby-dev tzdata postgresql-dev \
+# nodejs
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 RUN mkdir -p /app
 WORKDIR /app
