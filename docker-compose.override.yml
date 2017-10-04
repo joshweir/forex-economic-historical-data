@@ -34,6 +34,16 @@ services:
             - POSTGRES_USER
             - POSTGRES_PASSWORD
             - POSTGRES_DB
+
+#proposed:
+#dev:
+
+#prod:
+#export RAILS_ENV=production
+#docker-compose -f docker-compose.yml build
+#docker-compose -f docker-compose.yml push
+
+
 #ran:
 #docker-compose -f docker-compose-dev.yml build
 #POSTGRES_PASSWORD=fxdata FX_DEV_DB_PASS=fxdata docker-compose -f docker-compose-dev.yml up
