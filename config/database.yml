@@ -24,9 +24,15 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV['FX_DEV_DB_NAME'] %>
-  username: <%= ENV['FX_DEV_DB_USER'] %>
-  password: <%= ENV['FX_DEV_DB_PASS'] %>
+  database: fxdata_development
+  username: fxdata
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+development_scraper:
+  <<: *default
+  database: fxdata_development
+  username: fxdata
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -60,9 +66,9 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV['FX_TEST_DB_NAME'] %>
-  username: <%= ENV['FX_TEST_DB_USER'] %>
-  password: <%= ENV['FX_TEST_DB_PASS'] %>
+  database: fxdata_test
+  username: fxdata
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,20 +91,12 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['FX_PROD_DB_NAME'] %>
-  username: <%= ENV['FX_PROD_DB_USER'] %>
-  password: <%= ENV['FX_PROD_DB_PASS'] %>
-  port: <%= ENV['FX_PROD_DB_PORT'] %>
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production_scraper:
   <<: *default
-  database: <%= ENV['FX_PROD_DB_NAME'] %>
-  username: <%= ENV['FX_PROD_DB_USER'] %>
-  password: <%= ENV['FX_PROD_DB_PASS'] %>
-  port: <%= ENV['FX_PROD_DB_PORT'] %>
-
-development_scraper:
-  <<: *default
-  database: <%= ENV['FX_DEV_DB_NAME'] %>
-  username: <%= ENV['FX_DEV_DB_USER'] %>
-  password: <%= ENV['FX_DEV_DB_PASS'] %>
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>

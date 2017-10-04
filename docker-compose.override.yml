@@ -4,22 +4,23 @@ services:
         image: postgres
         restart: always
         volumes:
-            - /private/var/lib/postgresql/data:/var/lib/postgresql/data
+            - db-data:/var/lib/postgresql/data
         ports:
             - "5432:5432"
+        #env_file: .env
         environment:
-            - POSTGRES_USER=fxdata
+            - POSTGRES_USER
             - POSTGRES_PASSWORD
-            - POSTGRES_DB=fxdata_development
+            - POSTGRES_DB
     adminer:
         image: adminer
         restart: always
         ports:
             - "8080:8080"
     web:
-        build:
-            context: .
-            dockerfile: Dockerfile.dev
+        #build:
+        #    context: .
+        #    dockerfile: Dockerfile.dev
         command: bundle exec rails s -p 3000 -b '0.0.0.0'
         volumes:
           - .:/app
@@ -27,10 +28,12 @@ services:
           - "3000:3000"
         depends_on:
           - db
+        #env_file: .env
         environment:
-          - FX_DEV_DB_USER=fxdata
-          - FX_DEV_DB_PASS
-          - FX_DEV_DB_NAME=fxdata_development
+            - RAILS_ENV=${RAILS_ENV:-development}
+            - POSTGRES_USER
+            - POSTGRES_PASSWORD
+            - POSTGRES_DB
 #ran:
 #docker-compose -f docker-compose-dev.yml build
 #POSTGRES_PASSWORD=fxdata FX_DEV_DB_PASS=fxdata docker-compose -f docker-compose-dev.yml up
