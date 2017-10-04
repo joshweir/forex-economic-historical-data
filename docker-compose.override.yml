@@ -34,20 +34,21 @@ services:
             - POSTGRES_USER
             - POSTGRES_PASSWORD
             - POSTGRES_DB
-
+volumes:
+    db-data:
 #proposed:
 #dev:
-#docker-compose build 
-#docker-compose up 
+#docker-compose build
+#docker-compose up
 
 #prod:
-#build and push: 
+#build and push:
 #export RAILS_ENV=production
 #optionally specify the version of the stack to build/push (defaults to latest):
 #export FXDATA_VERSION=0.1.0
 #docker-compose -f docker-compose.yml build
 #docker-compose -f docker-compose.yml push
-#deploy: 
+#deploy:
 #export RAILS_ENV=production
 #optionally specify the version of the stack to build/push (defaults to latest):
 #export FXDATA_VERSION=0.1.0
