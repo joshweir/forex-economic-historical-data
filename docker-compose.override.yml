@@ -23,11 +23,11 @@ services:
         #    dockerfile: Dockerfile.dev
         command: bundle exec rails s -p 3000 -b '0.0.0.0'
         volumes:
-          - .:/app
+            - .:/app
         ports:
-          - "3000:3000"
+            - "3000:3000"
         depends_on:
-          - db
+            - db
         #env_file: .env
         environment:
             - RAILS_ENV=${RAILS_ENV:-development}
@@ -37,11 +37,23 @@ services:
 
 #proposed:
 #dev:
+#docker-compose build 
+#docker-compose up 
 
 #prod:
+#build and push: 
 #export RAILS_ENV=production
+#optionally specify the version of the stack to build/push (defaults to latest):
+#export FXDATA_VERSION=0.1.0
 #docker-compose -f docker-compose.yml build
 #docker-compose -f docker-compose.yml push
+#deploy: 
+#export RAILS_ENV=production
+#optionally specify the version of the stack to build/push (defaults to latest):
+#export FXDATA_VERSION=0.1.0
+#docker stack deploy fxdata-stack --compose-file docker-compose.yml --with-registry-auth
+
+
 
 
 #ran:
