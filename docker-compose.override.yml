@@ -17,7 +17,8 @@ services:
         ports:
             - "8080:8080"
     web:
-        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        command: bash -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+        restart: always
         volumes:
             - .:/app
         ports:
@@ -29,7 +30,10 @@ services:
             - POSTGRES_PASSWORD
             - POSTGRES_DB
     recurring-tasks:
-        command: bundle exec /app/lib/tasks/recurrent_tasks.rb
+        command: bundle exec /app/lib/tasks/recurring_tasks.rb
+        restart: "no"
+        volumes:
+            - .:/app
         depends_on:
             - db
         environment:

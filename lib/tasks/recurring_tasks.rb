@@ -1,11 +1,19 @@
 #!/usr/bin/env ruby
 
-#bundle exec /app/forex-economic-data-site/lib/tasks/recurrent_tasks.rb
+#bundle exec /app/forex-economic-data-site/lib/tasks/recurring_tasks.rb
+puts 'start!!!!!!!!'
+
 ENV['RAILS_ENV'] ||= 'production'
 ENV['RAILS_ENV'] = "#{ENV['RAILS_ENV']}_scraper"
+
 exit! unless %w(production_scraper development_scraper)
                 .include? ENV['RAILS_ENV']
+puts 'ark!!!!!!!!'
+
 require File.dirname(__FILE__) + '/../../config/environment'
+
+puts 'eff!!!!!!!!'
+Rails.logger.info 'effya!!!!!!'
 
 opts = Slop.parse do |o|
   o.separator 'eg usage:'
@@ -48,6 +56,18 @@ opts = Slop.parse do |o|
 end
 
 s = Rufus::Scheduler.singleton
-s.every '1m' do
-  puts "hello, it's #{Time.now}"
+s.every '5s' do
+  File.open("/app/log/scheduler1.log","a+") do |f|
+    f.puts("Started scheduler1 at #{Time.now}")
+  end
 end
+
+s.every '6s' do
+  File.open("/app/log/scheduler2.log","a+") do |f|
+    f.puts("Started scheduler2 at #{Time.now}")
+  end
+end
+
+s.join
+
+puts 'exiting'
