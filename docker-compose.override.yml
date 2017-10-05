@@ -25,7 +25,6 @@ services:
         depends_on:
             - db
         environment:
-            - RAILS_ENV=${RAILS_ENV:-development}
             - POSTGRES_USER
             - POSTGRES_PASSWORD
             - POSTGRES_DB
