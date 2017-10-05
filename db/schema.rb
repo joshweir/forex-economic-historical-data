@@ -12,19 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20170926080453) do
 
-  create_table "economic_event_instances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "economic_event_instances", force: :cascade do |t|
     t.bigint "economic_event_id"
     t.datetime "released"
     t.boolean "preliminary"
-    t.float "actual", limit: 24
-    t.float "forecast", limit: 24
-    t.float "previous", limit: 24
+    t.float "actual"
+    t.float "forecast"
+    t.float "previous"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["economic_event_id"], name: "index_economic_event_instances_on_economic_event_id"
   end
 
-  create_table "economic_event_sources", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+  create_table "economic_event_sources", force: :cascade do |t|
     t.bigint "economic_event_id"
     t.string "url_path", limit: 2000
     t.integer "priority"
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170926080453) do
     t.index ["economic_event_id"], name: "index_economic_event_sources_on_economic_event_id"
   end
 
-  create_table "economic_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+  create_table "economic_events", force: :cascade do |t|
     t.string "name", limit: 300
     t.string "alt_name", limit: 300
     t.text "description"
