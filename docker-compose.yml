@@ -33,14 +33,15 @@ services:
             - POSTGRES_USER
             - POSTGRES_PASSWORD
             - POSTGRES_DB
-    scraper:
+    recurrent-tasks:
         build:
             context: .
-            dockerfile: Dockerfile.scraper
+            dockerfile: Dockerfile.recurrent_tasks
             args:
                 - RAILS_ENV=${RAILS_ENV:-production}
-        image: joshweir/fxdata-stack/scraper:${FXDATA_VERSION:-latest}
-        command: bundle exec /app/lib/tasks/scrape_investing_com_events.rb ${RAILS_ENV}_scraper
+        image: joshweir/fxdata-stack/recurrent-tasks:${FXDATA_VERSION:-latest}
+        command: bundle exec /app/lib/tasks/recurrent_tasks.rb
+        restart: always
         depends_on:
             - db
         environment:

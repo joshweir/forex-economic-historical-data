@@ -12,8 +12,7 @@ gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 #if using mysql
 #gem 'mysql2', '~> 0.3.18'
-# Use Puma as the app server
-gem 'puma', '~> 3.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,10 +36,12 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'will_paginate', '~> 3.0.6'
-gem 'will_paginate-bootstrap'
-
-gem 'delayed_job_active_record'
+group :development, :test, :production do
+  # Use Puma as the app server
+  gem 'puma', '~> 3.0'
+  gem 'will_paginate', '~> 3.0.6'
+  gem 'will_paginate-bootstrap'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,6 +66,7 @@ group :development do
 end
 
 group :production_scraper, :development_scraper do
+  gem 'rufus-scheduler'
   gem "slop", '~> 4.2.1'
   gem 'scraypa'
   gem 'nokogiri'
