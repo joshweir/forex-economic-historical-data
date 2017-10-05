@@ -28,6 +28,16 @@ services:
             - POSTGRES_USER
             - POSTGRES_PASSWORD
             - POSTGRES_DB
+    recurring_jobs:
+        command: bundle exec /app/lib/tasks/scrape_investing_com_events.rb ${RAILS_ENV}_scraper
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+        environment:
+            - POSTGRES_USER
+            - POSTGRES_PASSWORD
+            - POSTGRES_DB
 volumes:
     db-data:
 

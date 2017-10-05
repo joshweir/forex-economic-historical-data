@@ -1,0 +1,10 @@
+FROM ruby:2.3.4
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+RUN mkdir -p /app
+WORKDIR /app
+COPY . ./
+ARG RAILS_ENV=production
+ENV RAILS_ENV $RAILS_ENV
+RUN gem install sigar -- --with-cppflags="-fgnu89-inline"
+RUN if [ "$RAILS_ENV" = "production" ] ; then echo "production env" && gem install bundler && bundle install --without development test development_scraper ; else echo "non-production env $RAILS_ENV" && gem install bundler && bundle install ; fi
+CMD ["bundle", "exec", "/app/lib/tasks/scrape_investing_com_events.rb", "${RAILS_ENV}_scraper"]

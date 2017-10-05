@@ -37,14 +37,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 gem 'delayed_job_active_record'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-
-  gem 'will_paginate', '~> 3.0.6'
-  gem 'will_paginate-bootstrap'
   gem 'rspec-rails'
   gem 'faker'
   gem 'guard-rspec'
