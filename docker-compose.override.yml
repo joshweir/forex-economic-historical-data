@@ -21,6 +21,7 @@ services:
         restart: always
         volumes:
             - .:/app
+            - bundle_cache:/bundle
         ports:
             - "3000:3000"
         depends_on:
@@ -30,10 +31,12 @@ services:
             - POSTGRES_PASSWORD
             - POSTGRES_DB
     recurring-tasks:
-        command: bundle exec /app/lib/tasks/recurring_tasks.rb
+        command: echo "no recurring tasks dev"
+          #bundle exec /app/lib/tasks/recurring_tasks.rb
         restart: "no"
         volumes:
             - .:/app
+            - bundle_cache:/bundle
         depends_on:
             - db
         environment:
@@ -42,6 +45,7 @@ services:
             - POSTGRES_DB
 volumes:
     db-data:
+    bundle_cache:
 
 
 #proposed:

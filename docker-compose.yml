@@ -25,6 +25,8 @@ services:
         image: joshweir/fxdata-stack/web:${FXDATA_VERSION:-latest}
         command: bash -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
         restart: always
+        stdin_open: true
+        tty: true
         ports:
             - "3000:3000"
         depends_on:
@@ -43,6 +45,8 @@ services:
         image: joshweir/fxdata-stack/recurring-tasks:${FXDATA_VERSION:-latest}
         command: bundle exec /app/lib/tasks/recurring_tasks.rb
         restart: always
+        stdin_open: true
+        tty: true
         depends_on:
             - db
         environment:
